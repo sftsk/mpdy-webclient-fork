@@ -24,6 +24,9 @@ function resetSong() {
 function resizeMb() {
     $("#infoname").html(songdata.name);
     $("#infoartist").html(artiststext);
+
+    
+
 //    //set height of playlist scrollers
 
     if ($(window).width() > 480) {
@@ -45,6 +48,8 @@ function resizeMb() {
 }
 
 function setSongInfo(data) {
+    var artist, song, album, cover;
+
 //    console.log(data, songdata);
     if (!data ) { return; }
     if ( (data.uri == songdata.uri) ) { return;}
@@ -65,6 +70,8 @@ function setSongInfo(data) {
 	}
     };
     }
+
+
     
     songdata = data;
 
@@ -86,6 +93,7 @@ function setSongInfo(data) {
     var arttmp = '';
     
     if(data.artists) {
+        artist = data.artists[0].name;
 	for (var j = 0; j < data.artists.length; j++) {
     	    artistshtml += '<a href="#" onclick="return showArtist(\'' + data.artists[j].uri + '\');">' + data.artists[j].name + '</a>';
     	    artiststext += data.artists[j].name;
@@ -97,7 +105,12 @@ function setSongInfo(data) {
         arttmp = artistshtml;
     }
 
+    
+
+
+
     if (data.album && data.album.name) {
+        album = data.album.name;
         $("#modalalbum").html('<a href="#" onclick="return showAlbum(\'' + data.album.uri + '\');">' + data.album.name + '</a>');
         getCover(artiststext, data.album.name, '#infocover, #controlspopupimage', 'extralarge');
     } else {
@@ -110,7 +123,10 @@ function setSongInfo(data) {
 
     $("#trackslider").attr("min", 0);
     $("#trackslider").attr("max", data.length);
-    
+
+    if (artist !== undefined) {
+        notify(artist + ' – ' + songdata.name, album);
+    }
     resizeMb();
 }
 

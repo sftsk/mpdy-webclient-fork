@@ -53,7 +53,7 @@ var ua = navigator.userAgent,
 var radioExtensionsUris = ['somafm', 'tunein', 'dirble'];
 
 //constants
-PROGRAM_NAME = 'MusicBox';
+PROGRAM_NAME = 'music';
 //PROGRAM_NAME = 'Mopidy';
 ARTIST_TABLE = '#artiststable';
 ALBUM_TABLE = '#albumstable';
@@ -159,6 +159,8 @@ function renderSongLi(song, liID, uri, playlistType){
     } else {
 	name = song.name;
     }
+    
+
     songLi = '<li class="song albumli" id="' + liID + '">' +
         '<a href="#" class="moreBtn" onclick="return popupTracks(event, \'' + uri + '\',\'' + song.uri + '\');">' +
         '<i class="fa fa-ellipsis-vertical"></i>' +
@@ -171,7 +173,7 @@ function renderSongLi(song, liID, uri, playlistType){
 }
 
 function resultsToTables(results, target, uri) {
-console.log(results, target, uri);
+// console.log(results, target, uri);
     if (!results) { return }
     if (target == '#currenttable') {
         playlistType = 'playTrackQueueByUri';
@@ -278,7 +280,7 @@ console.log(results, target, uri);
 	  } //albums name
         }
     }
-  console.log(html);
+  // console.log(html);
     tableid = "#" + tableid;
     $(target).html(html);
     $(target).attr('data', uri);
